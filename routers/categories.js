@@ -5,12 +5,19 @@ const user = require("../models").user;
 const product = require("../models").product;
 const category = require("../models").category;
 
-//All Categories, include products
+//All Categories, include products (only titles)
 router.get("/", async (req, res) => {
   const allCategories = await category.findAll({
-    include: [product],
+    include: [{ model: product, attributes: ["title"] }],
   });
-  ``;
+
+  /*
+  //All Categories, include products (All product data)
+router.get("/", async (req, res) => {
+  const allCategories = await category.findAll({
+    include: [{ model: product, attributes: ["title"] }],
+  });
+*/
 
   res.send(allCategories);
 });
