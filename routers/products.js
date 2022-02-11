@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
   const allProducts = await product.findAll({
     include: [category],
   });
-  ``;
 
   res.send(allProducts);
 });

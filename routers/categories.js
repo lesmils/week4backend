@@ -10,17 +10,16 @@ router.get("/", async (req, res) => {
   const allCategories = await category.findAll({
     include: [{ model: product, attributes: ["title"] }],
   });
+  res.send(allCategories);
+});
 
-  /*
+/*
   //All Categories, include products (All product data)
 router.get("/", async (req, res) => {
   const allCategories = await category.findAll({
     include: [{ model: product, attributes: ["title"] }],
   });
 */
-
-  res.send(allCategories);
-});
 
 //Get specific category by ID, include category
 router.get("/:id", async (req, res) => {

@@ -1,12 +1,13 @@
 const { Router } = require("express");
 const router = new Router();
+const bcrypt = require("bcrypt");
 
 const user = require("../models").user;
 const product = require("../models").product;
 const category = require("../models").category;
 
 //create new account
-router.post("/signup", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
@@ -15,8 +16,9 @@ router.post("/signup", async (req, res) => {
       res.status(400).send("Please provide a email, name and password");
     } else {
       const newUser = await user.create({
-        email,
-        password: bcrypt.hashSync(password, 10),
+        name: name,
+        email: email,
+        password: bcrypt.hashSync(password, 12),
       });
       res.send(newUser);
     }

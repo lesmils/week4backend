@@ -3,6 +3,13 @@ const express = require("express");
 const port = 4000;
 const app = express();
 app.use(express.json());
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 const categoryRouter = require("./routers/categories");
 const userRouter = require("./routers/users");
 const productRouter = require("./routers/products");
